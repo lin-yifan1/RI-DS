@@ -31,7 +31,7 @@ WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-// #define MDEBUG
+#define MDEBUG
 
 #include <iostream>
 #include <fstream>
@@ -275,14 +275,7 @@ int match(
 					std::cout << "initializing domain...\n";
 #endif
 					bool domok;
-					if (filetype != GFT_REG) {
-						domok = init_domains(*rrg, *query, *nodeComparator, *edgeComparator, domains, doBijIso);
-					}
-					else {
-						// TODO construct domains for Regionless project
-						// domain is an array of sbitset
-						domok = true;
-					}
+					domok = init_domains(*rrg, *query, *nodeComparator, *edgeComparator, domains, doBijIso);
 					match_t += end_time(match_s);
 
 					// if domain constraints are satisfied (at least one compatible target node for each query node)
