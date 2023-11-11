@@ -1,7 +1,7 @@
 INCLUDES= -I ./rilib/ -I ./include/
 CC=g++
-#CFLAGS=-c -O3 -g
-CFLAGS=-c -O3
+CFLAGS=-c -O3 -g
+#CFLAGS=-c -O3
 
 SOURCES= ri3.cpp
 OBJECTS=$(SOURCES:.cpp=.o)

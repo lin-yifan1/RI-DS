@@ -70,7 +70,7 @@ public:
 
 			for(ii=0; ii<rgraph.out_adj_sizes[rsource]; ii++){
 				if(rgraph.out_adj_list[rsource][ii] == rtarget){
-					if(! edgeComparator.compare(rgraph.out_adj_attrs[rsource][ii],  mama.edges[si][me].attr)){
+					if(! edgeComparator.compare(mama.edges[si][me].attr, rgraph.out_adj_attrs[rsource][ii])){
 						return false;
 					}
 					else{

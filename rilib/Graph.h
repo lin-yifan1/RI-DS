@@ -35,11 +35,11 @@ namespace rilib{
 class Graph{
 public:
 	int id;
-	int nof_nodes;
+	int nof_nodes; // number of nodes
 
 	void** nodes_attrs;
 
-	int* out_adj_sizes;
+	int* out_adj_sizes; // array of the out edges of the nodes
 	int* in_adj_sizes;
 
 	int** out_adj_list;

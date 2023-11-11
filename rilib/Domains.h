@@ -56,7 +56,7 @@ bool init_domains(
 			for(int r=target.nof_nodes-1; r>=0; r--){
 				if(		target.out_adj_sizes[r] == pattern.out_adj_sizes[q]
 					&&	target.in_adj_sizes[r] == pattern.in_adj_sizes[q]
-					&& 	nodeComparator.compare(target.nodes_attrs[r], pattern.nodes_attrs[q])){
+					&& 	nodeComparator.compare(pattern.nodes_attrs[q], target.nodes_attrs[r])){
 					domains[q].set(r, true);
 				}
 			}
@@ -70,7 +70,7 @@ bool init_domains(
 			for(int r=target.nof_nodes-1; r>=0; r--){
 				if(		target.out_adj_sizes[r] >= pattern.out_adj_sizes[q]
 					&&	target.in_adj_sizes[r] >= pattern.in_adj_sizes[q]
-					&& 	nodeComparator.compare(target.nodes_attrs[r], pattern.nodes_attrs[q])){
+					&& 	nodeComparator.compare(pattern.nodes_attrs[q], target.nodes_attrs[r])){
 					domains[q].set(r, true);
 				}
 			}

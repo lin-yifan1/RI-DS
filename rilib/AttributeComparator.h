@@ -38,6 +38,9 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <vector>
+#include <fstream>
+#include <sstream>
 
 namespace rilib{
 
@@ -95,6 +98,63 @@ public:
 		int* b=(int*)attr2;
 		return (*a)-(*b);
 	};
+};
+
+class RegNodeAttrComparator: public AttributeComparator{
+public:
+	std::vector<std::vector<bool>> filter;
+	int nof_query;
+	int nof_ref;
+public:
+	RegNodeAttrComparator(char *filtername){
+		std::ifstream filterfile(filtername);
+
+		filterfile >> nof_query; // number of query nodes
+		filterfile >> nof_ref; // number of nodes in reference graph
+
+		filter.resize(nof_query, std::vector<bool>(nof_ref, false));
+
+		for (int query = 0; query < nof_query; query++)
+		{
+			std::string line;
+    		std::getline(filterfile, line);
+			std::istringstream iss(line);
+			int ref;
+			while (iss >> ref) {
+				filter[query][ref] = true;
+			}
+		}
+		
+	};
+	virtual bool compare(void* attr1, void* attr2){
+		// attr1 must be pattern/query, attr2 must be target/reference
+		int* a = (int*)attr1;
+		int* b = (int*)attr2;
+		int query = *a;
+		int reference = *b;
+		return filter[query][reference];
+	};
+	virtual int compareint(void* attr1, void* attr2){
+		return 0;
+	}
+};
+
+class RegEdgeAttrComparator: public AttributeComparator{
+public:
+	RegEdgeAttrComparator(){};
+	virtual bool compare(void* attr1, void* attr2){
+		// attr1 must be query, attr2 must be reference
+		int* a = (int*)attr1;
+		int* b = (int*)attr2;
+		int bw_q = a[0];
+		int ltc_q = a[1];
+		int bw_r = b[0];
+		int ltc_r = b[1];
+		return (bw_q <= bw_r) && (ltc_q >= ltc_r);
+	};
+	virtual int compareint(void* attr1, void* attr2){
+		return 0;
+	}
 };
 
 }
