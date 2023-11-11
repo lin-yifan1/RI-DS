@@ -864,6 +864,7 @@ int read_reg(const char *fileName, FILE *fd, Graph *graph)
 			graph->out_adj_list[i][j] = n->nid;
 			
 			// create a 2-element int array to store bw and ltc
+			// TODO figure out the void ** 
 			int* attr = (int *)malloc(2 * sizeof(int));
 			attr[0] = n->bw;
 			attr[1] = n->ltc;

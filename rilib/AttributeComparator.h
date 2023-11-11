@@ -49,6 +49,9 @@ namespace rilib{
 
 class AttributeComparator{
 public:
+	std::vector<std::vector<bool>> filter;
+	int nof_query;
+	int nof_ref;
 	virtual ~AttributeComparator(){};
 	virtual bool compare(void* attr1, void* attr2)=0;
 	virtual int compareint(void* attr1, void* attr2)=0;
@@ -102,10 +105,6 @@ public:
 
 class RegNodeAttrComparator: public AttributeComparator{
 public:
-	std::vector<std::vector<bool>> filter;
-	int nof_query;
-	int nof_ref;
-public:
 	RegNodeAttrComparator(char *filtername){
 		std::ifstream filterfile(filtername);
 
@@ -114,9 +113,11 @@ public:
 
 		filter.resize(nof_query, std::vector<bool>(nof_ref, false));
 
+		std::string line;
+		std::getline(filterfile, line); // move to the next line
+
 		for (int query = 0; query < nof_query; query++)
 		{
-			std::string line;
     		std::getline(filterfile, line);
 			std::istringstream iss(line);
 			int ref;
