@@ -49,6 +49,7 @@ namespace rilib{
 
 class AttributeComparator{
 public:
+	// TODO: temporarily move these attrs here
 	std::vector<std::vector<bool>> filter;
 	int nof_query;
 	int nof_ref;
@@ -129,10 +130,10 @@ public:
 	};
 	virtual bool compare(void* attr1, void* attr2){
 		// attr1 must be pattern/query, attr2 must be target/reference
-		int* a = (int*)attr1;
-		int* b = (int*)attr2;
-		int query = *a;
-		int reference = *b;
+		std::string* a=(std::string*)attr1;
+		std::string* b=(std::string*)attr2;
+		int query = std::stoi(a->c_str());
+		int reference = std::stoi(b->c_str());
 		return filter[query][reference];
 	};
 	virtual int compareint(void* attr1, void* attr2){
