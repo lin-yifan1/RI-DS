@@ -9,11 +9,13 @@ EXECUTABLE=ri351ds
 #EXECUTABLE=ri351ds_matches
 #EXECUTABLE=ri351ds_dbg
 
-
-all:	$(SOURCES) $(EXECUTABLE)
+all: $(EXECUTABLE)
 
 $(EXECUTABLE): $(OBJECTS)
 	$(CC) $(OBJECTS) -o $@
 
 .cpp.o:
 	$(CC) $(CFLAGS) $< $(INCLUDES) -o $@  
+
+clean:
+	rm -f $(OBJECTS) $(EXECUTABLE)
