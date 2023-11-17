@@ -83,7 +83,7 @@ int main(int argc, char *argv[])
 	std::string reference;
 	std::string query;
 
-	std::string par = argv[1];
+	std::string par = argv[1]; // match type
 	if (par == "iso")
 	{
 		matchtype = MT_ISO;
@@ -102,7 +102,7 @@ int main(int argc, char *argv[])
 		return -1;
 	}
 
-	par = argv[2];
+	par = argv[2]; // file type
 	if (par == "gfu")
 	{
 		filetype = GFT_GFU; // undirected type
@@ -152,7 +152,7 @@ void usage(char *args0)
 	std::cout << "\t\tgeu = undirect graphs with labels both on nodes and edges\n";
 	std::cout << "\t\tged = direct graphs with labels both on nodes and edges\n";
 	std::cout << "\t\treg = self defined graph type for Huawei's Regionless project\n";
-	std::cout << "\treference file contains one ormore reference graphs\n";
+	std::cout << "\treference file contains one or more reference graphs\n";
 	std::cout << "\tquery contains the query graph (just one)\n";
 };
 
