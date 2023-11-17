@@ -6,3 +6,5 @@ tmp
 graph.ged
 compare.py
 get_domains.py
+
+.vscode/
