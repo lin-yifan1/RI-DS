@@ -294,6 +294,7 @@ public:
 			void operator++ (int){
 			   ++(*this);
 			}
+			// 下一个值为 true 的比特
 			void next_ones(){
 				do{
 					if(_shift == 0){
@@ -348,6 +349,9 @@ public:
 		return iterator(*this, _nblocks);
 	}
 
+	/*
+	* 返回第一个值为 "true" 的比特
+	*/
 	iterator first_ones(){
 		if(is_empty())
 			return end();

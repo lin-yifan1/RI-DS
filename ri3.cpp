@@ -304,7 +304,6 @@ int match(
 						std::cout << "building matching machine...\n";
 #endif
 						// build the static match machine
-						// TODO what is mama?
 						make_mama_s = start_time();
 						MatchingMachine *mama = new MaMaConstrFirstDs(*query, domains, domains_size);
 						mama->build(*query);

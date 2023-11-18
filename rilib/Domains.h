@@ -94,6 +94,11 @@ bool init_domains(
 		for(sbitset::iterator qaIT=domains[qa].first_ones(); qaIT!=domains[qa].end(); qaIT.next_ones()){
 			ra = qaIT.first;
 			//for each edge qa->qb  check if exists ra->rb
+			// 对任意的 query node qa，
+			// 如果将其 match 到 ra，
+			// 那么对于 qa 的每一个邻居 qb，
+			// 必须保证其可以被 match 到 ra 的某个邻居 rb，
+			// 否则 qa 不可以被 match 到 ra
 			for(int i_qb=0; i_qb<pattern.out_adj_sizes[qa]; i_qb++){
 				qb = pattern.out_adj_list[qa][i_qb];
 				notfound = true;
@@ -117,6 +122,8 @@ bool init_domains(
 			return false;
 	}
 
+	// 我不太明白下面这一段的意义，
+	// 看上去只是上一段的另一种实现。
 	bool changes = true;
 	while(changes){
 		changes = false;
